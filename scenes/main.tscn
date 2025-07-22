@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmo5eqbwkwllo"]
+
+[ext_resource type="Script" uid="uid://m2fvd5j6jd46" path="res://addons/stairs/stairs.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://ddbrjl4f8by41" path="res://scenes/Player.tscn" id="2_0wfyh"]
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0.482966, -0.595035, 0.6424, -0.12941, 0.677075, 0.724446, 0, 46, 20)
+shadow_enabled = true
+directional_shadow_max_distance = 8192.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -2.42285)
+use_collision = true
+size = Vector3(34, 1, 27)
+
+[node name="Stairs" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 2, 5)
+script = ExtResource("1_o5qli")
+size = Vector3(8, 5, 11)
+step_count = 24
+metadata/_custom_type_script = "uid://m2fvd5j6jd46"
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23, -9)
