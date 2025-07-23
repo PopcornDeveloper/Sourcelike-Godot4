@@ -38,8 +38,8 @@ func _process(delta: float) -> void:
 	if is_on_floor():
 		grounded = true
 		if Input.is_action_just_pressed("jump"):
-			velocity.y = 5
-			velocity += direction * 1.5
+			velocity.y = jump_speed
+			velocity += direction * 1.15
 
 		if direction != Vector3.ZERO:
 			velocity.x = move_toward(velocity.x, direction.x * speed, accel * delta)
