@@ -1,7 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmo5eqbwkwllo"]
+[gd_scene load_steps=11 format=3 uid="uid://bmo5eqbwkwllo"]
 
 [ext_resource type="Script" uid="uid://m2fvd5j6jd46" path="res://addons/stairs/stairs.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://ddbrjl4f8by41" path="res://scenes/Player.tscn" id="2_0wfyh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wfyh"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_sugp2"]
+sky_material = SubResource("ProceduralSkyMaterial_0wfyh")
+
+[sub_resource type="Environment" id="Environment_jyhfs"]
+background_mode = 2
+sky = SubResource("Sky_sugp2")
+tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wfyh"]
 albedo_color = Color(0.386757, 0.386757, 0.386757, 1)
@@ -26,6 +38,9 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [node name="Node3D" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jyhfs")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0.482966, -0.595035, 0.6424, -0.12941, 0.677075, 0.724446, 0, 46, 20)

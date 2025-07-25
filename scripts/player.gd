@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+var time : float
+
 @export var accel = 30.0
 @export var friction = 15.0
 @export var max_speed = 10.0
@@ -22,6 +24,8 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _process(delta: float) -> void:
+	time += delta
+
 	direction = Vector3.ZERO
 
 	velocity.y -= 16.34 * delta
@@ -33,8 +37,18 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_pressed("left"):
 		direction -= transform.basis.x
+		camera.rotation.z = lerpf(camera.rotation.z, 1.0 / 64.0, 5 * delta)
 	elif Input.is_action_pressed("right"):
 		direction += transform.basis.x
+		camera.rotation.z = lerpf(camera.rotation.z, -1.0 / 64.0, 5 * delta)
+	else:
+		camera.rotation.z = lerpf(camera.rotation.z, 0, 5 * delta)
+
+	direction = direction.normalized()
+
+	camera.position.y = camera_movement(15, 0.5)
+	camera.position.x = camera_movement(15.0 / 2, 1)	
+
 	if is_on_floor():
 		grounded = true
 		if Input.is_action_just_pressed("jump"):
@@ -61,3 +75,7 @@ func _process(delta: float) -> void:
 		grounded = false
 	
 	move_and_slide()
+
+
+func camera_movement(time_mult, sin_size):
+	return sin(time * time_mult) * velocity.length_squared() / 1500 * sin_size
